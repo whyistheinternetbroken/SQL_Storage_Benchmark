@@ -9,14 +9,15 @@
     py -m pip install -r requirements.txt
     ``` 
 ### Example - Populating a MSSQL database
-Let's create a 200GB MSSQL database by creating 10 (ten) 20GB tables with randomized data.
+Creating a 200GB MSSQL database with 10 (ten) 20GB tables with randomized data.
 ```
 py setupssb.py -s mssql -d 200GB -ut 10 -D ssbtest -H 10.1.1.1 -l sa -p mysapassword -o 17 -P 1433
 ```
 
 ### Example - Driving a workload using SSB
+Starting a 80% SELECT workload for 30 seconds using 1 thread per user table.
 ```
-py startssb.py -s mssql -D ssbtest -u 5 -r 80 -H WIN-C63QSLO1620 -l sa -p Netapp123! -o 17 -S 30 -mu 5 -rs 12 -ru 8 -t 1
+py startssb.py -s mssql -D ssbtest -u 10 -r 80 -H WIN-C63QSLO1620 -l sa -p Netapp123! -o 17 -S 30 -mu 10 -rs 70 -ru 70 -t 1
 ```
 
 ## What is SSB?
@@ -139,7 +140,7 @@ For a synopsis on what the following recommended settings do, please refer to th
 
 -u Users: The number of users to run in the test. You can enter more users than exist in the database. The effect is the program will cycle through the Users parameter so that each user table is accessed. For example, if you have a 4-user database and you enter “-u 6” for the test, then the first four users will access their respective user tables, the fifth user will access user one table, and the sixth user will access user two table. If you enter “-u 8”, then each user table would have two users accessing their respective table.
 
-[-mut max_users_tables] (optional – default to actual number of user tables): The maximum number of user tables in the database. If you enter “0”, SSB will default to the actual number of user tables in the database. If the number entered is less than the number of user tables in the database, then the test will run with that many users, regardless of the number of user tables in the database. This will have the effect of not fully accessing the entire database and will usually result in more data being cached and less IO going to disk.
+-mu max_users_tables: The maximum number of user tables in the database.
 
 [-mr max_rows] rows (optional – default to actual number of rows in each user table): This is the  maximum number of rows in each user table. Entering anything less than the maximum  number of rows per user has the effect of changing the working set size,  with each user table being accessed, but limited to the max number of rows specified.
 
