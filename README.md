@@ -79,7 +79,7 @@ When building a MySQL database on either Linux or Windows, it is necessary to sp
 
 ## Recommended Settings
 ### MySQL 
-* Currently the default page size for MySQL is 4KB and SSB currently only has support for 16KB page size, although this will likely change in future versions. 
+* Currently the default page size for MySQL is 16KB and SSB currently only has support for 16KB page size, although this will likely change in future versions. 
 
 * SSB with MySQL has been tested only with the InnoDB database engine. It is recommended that InnoDB be configured as shown below.
 
