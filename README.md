@@ -95,7 +95,7 @@ When running SSB, it is important that the database has been configured appropri
 
 This issue does not occur when doing 100% reads, but using any percentage of writes can hit this error - especially when specifying a larger number of users (via the -u option). Naturally, the larger % of writes, the greater the chance of hitting this condition. You will be less likely to hit this issue if you also specify -mu (max users) as the same or greater value as users. (ie, if -u is 100, then set -mu as 100 or more).
 
-* If the number of users/max users specified exceeds the number of tables created in the database, then errors can also occur (as the tables won't exist of the users to read/write to).
+* If the number of max users specified exceeds the number of tables created in the database, then errors can also occur (as the tables won't exist of the users to read/write to).
 
 * Before a test run, it may make sense to [drop memory caches](https://unix.stackexchange.com/questions/87908/how-do-you-empty-the-buffers-and-cache-on-a-linux-system) on the client to ensure RAM isn't helping us.
 
