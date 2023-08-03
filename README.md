@@ -123,9 +123,11 @@ For a synopsis on what the following recommended settings do, please refer to th
 * Database Target Recovery Interval: 0 seconds
 
 Microsoft also publishes a best practice for SQL performance document, found here:
+
 https://learn.microsoft.com/en-us/sql/linux/sql-server-linux-performance-best-practices?view=sql-server-ver16
 
 These recommendations include some settings that leverage the use of the tuned utility in Linux.
+
 https://tuned-project.org/
 
 Using the MS SQL profile changes these settings and when tuned is disabled, the changes revert to defaults. Highly recommended.
