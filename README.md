@@ -93,7 +93,7 @@ When running SSB, it is important that the database has been configured appropri
 
 * When using the load generating tool, keep in mind that if too many users are attempting to write to the same table at the same time, a [deadlock](https://learn.microsoft.com/en-us/sql/relational-databases/sql-server-deadlocks-guide?view=sql-server-ver16) will occur. 
 
-This issue does not occur when doing 100% reads, but using any percentage of writes can hit this error - especially when specifying a larger number of users (via the -u option). Naturally, the larger % of writes, the greater the chance of hitting this condition. You will be less likely to hit this issue if you also specify -mu (max users) as the same or greater value as users. (ie, if -u is 100, then set -mu as 100 or more).
+This issue does not occur when doing 100% reads, but using any percentage of writes can hit this error - especially when specifying a larger number of users (via the -u option). Naturally, the larger % of writes, the greater the chance of hitting this condition. You will be less likely to hit this issue if you also specify -mu (max users) as the same or greater value as users (ie, if -u is 100, then set -mu as 100 or more) or to the same or lesser value of the number of tables. (If your database was created with 20 tables, set max users to 20 or less to avoid deadlocks).
 
 * If the number of max users specified exceeds the number of tables created in the database, then errors can also occur (as the tables won't exist of the users to read/write to).
 
