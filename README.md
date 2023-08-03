@@ -95,7 +95,11 @@ When running SSB, it is important that the database has been configured appropri
 
 This issue does not occur when doing 100% reads, but using any percentage of writes can hit this error - especially when specifying a larger number of users (via the -u option). Naturally, the larger % of writes, the greater the chance of hitting this condition. You will be less likely to hit this issue if you also specify -mu (max users) as the same or greater value as users. (ie, if -u is 100, then set -mu as 100 or more).
 
-* If the number of users specified exceeds the number of tables created in the database, then errors can also occur.
+* If the number of users/max users specified exceeds the number of tables created in the database, then errors can also occur (as the tables won't exist of the users to read/write to).
+
+* Before a test run, it may make sense to [drop memory caches](https://unix.stackexchange.com/questions/87908/how-do-you-empty-the-buffers-and-cache-on-a-linux-system) on the client to ensure RAM isn't helping us.
+
+* It may also be beneficial (especially on read-heavy tests) to [modify the readahead caches](https://learn.microsoft.com/en-us/azure/azure-netapp-files/performance-linux-nfs-read-ahead) on the mount.
 
 ## Building a database
 When building a MySQL database on either Linux or Windows, it is necessary to specify a path for temporary data files to be written. If no path is specified, SSB will use the default working directory as the data files path. SSB uses a built-in MySQL function to read the data files and quickly load the data into the database. There must be enough capacity to hold at least 4 GB of temporary data on the drive pointed to as the temporary data path, regardless of the size of the database specified. SSB does not currently retain the datafiles so the space required will only be temporary.  When building a Microsoft SQL Server database on either Linux or Windows, it is not necessary to specify a path for temporary data files to be written.
