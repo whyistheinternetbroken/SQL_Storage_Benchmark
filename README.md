@@ -7,17 +7,30 @@
 4. Install all SSB dependencies:
     ```
     py -m pip install -r requirements.txt
-    ``` 
+    ```
+Ubuntu 20.04 doesn't like the above command and the requirements file is different, so use:
+    ```
+    pip install -r requirements_python3.txt
+    ```
+
 ### Example - Populating a MSSQL database
 Creating a 200GB MSSQL database with 10 (ten) 20GB tables with randomized data.
 ```
 py setupssb.py -s mssql -d 200GB -ut 10 -D ssbtest -H 10.1.1.1 -l sa -p mysapassword -o 17 -P 1433
 ```
+Ubuntu 20.04 doesn't seem to like the above command, so use this instead:
+```
+python3 setup_python3_ssb.py -s mssql -d 200GB -ut 10 -D ssbtest -H 10.1.1.1 -l sa -p mysapassword -o 17 -P 1433
+```
 
 ### Example - Driving a workload using SSB
 Starting a 80% SELECT workload for 30 seconds using 1 thread per user table.
 ```
-py startssb.py -s mssql -D ssbtest -u 10 -r 80 -H WIN-C63QSLO1620 -l sa -p Netapp123! -o 17 -S 30 -mu 10 -rs 70 -ru 70 -t 1
+py startssb.py -s mssql -D ssbtest -u 10 -r 80 -H hostname-or-IP -l sa -p Netapp123! -o 17 -S 30 -mu 10 -rs 70 -ru 70 -t 1
+```
+Ubuntu 20.04 doesn't seem to like the above command, so use this instead:
+```
+python3 startssb.py -s mssql -D ssbtest -u 10 -r 80 -H hostname-or-IP -l sa -p Netapp123! -o 17 -S 30 -mu 10 -rs 70 -ru 70 -t 1
 ```
 
 ## What is SSB?
@@ -54,7 +67,11 @@ SSB leverages other python modules. The required Python modules are listed in th
 On Linux
 ```
 python3 -m pip install -r requirements.txt
-``` 
+```
+Ubuntu 20.04 doesn't like the above command and the requirements file is different, so use:
+```
+pip install -r requirements_python3.txt
+```
 
 On Windows:
 ```
@@ -105,9 +122,19 @@ For a synopsis on what the following recommended settings do, please refer to th
 * Database logging mode: Simple
 * Database Target Recovery Interval: 0 seconds
 
+Microsoft also publishes a best practice for SQL performance document, found here:
+https://learn.microsoft.com/en-us/sql/linux/sql-server-linux-performance-best-practices?view=sql-server-ver16
+
+These recommendations include some settings that leverage the use of the tuned utility in Linux.
+https://tuned-project.org/
+
+Using the MS SQL profile changes these settings and when tuned is disabled, the changes revert to defaults. Highly recommended.
+
+Network setting changes will vary based on your configuration. (For instance, jumbo frames might not be enabled in your network, NIC drivers may not be able to enable some settings).
+
 ## SSB Command Line & Parameters
 
-### setupssb.py
+### setupssb.py | setup_python3_ssb.py
 ```
 [-h Help] (optional): Provides help on the start_SSB.py command
 
