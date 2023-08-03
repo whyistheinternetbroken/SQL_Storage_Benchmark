@@ -95,9 +95,7 @@ When running SSB, it is important that the database has been configured appropri
 
 https://learn.microsoft.com/en-us/sql/relational-databases/sql-server-deadlocks-guide?view=sql-server-ver16
 
-  This issue does not occur when doing 100% reads, but using any percentage of writes can hit this error - especially when specifying a larger number of users (via the -u 
-  option). Naturally, the larger % of writes, the greater the chance of hitting this condition. You will be less likely to hit this issue if you also specify -mu (max 
-  users) as the same or greater value as users. (ie, if -u is 100, then set -mu as 100 or more).
+    This issue does not occur when doing 100% reads, but using any percentage of writes can hit this error - especially when specifying a larger number of users (via the -u option). Naturally, the larger % of writes, the greater the chance of hitting this condition. You will be less likely to hit this issue if you also specify -mu (max users) as the same or greater value as users. (ie, if -u is 100, then set -mu as 100 or more).
 
 * If the number of users specified exceeds the number of tables created in the database, then errors can also occur.
 
