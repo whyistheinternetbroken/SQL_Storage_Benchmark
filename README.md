@@ -10,9 +10,8 @@
     ```
 Ubuntu 20.04 doesn't like the above command and the requirements file is different, so use:
 
-    ```
+
     pip install -r requirements_python3.txt
-    ```
 
 ### Example - Populating a MSSQL database
 Creating a 200GB MSSQL database with 10 (ten) 20GB tables with randomized data.
