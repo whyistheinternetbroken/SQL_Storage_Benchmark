@@ -91,11 +91,9 @@ When running SSB, it is important that the database has been configured appropri
 ## Special Considerations
 * When building a database in Microsoft SQL Server, bcp.exe by default uses port 1433 unless otherwise specified. Microsoft SQL Server 2008 and later uses Dynamic ports by default. If SSB is not told the correct port number that the Microsoft SQL Server is using, SSB will fail to load the data into the database as bcp.exe will default to port 1433.  The Microsoft Configurator tool can be used to determine the dynamic port number that Microsoft SQL Server is running on.  If SSB will be used to test MySQL, there is no port number requirement, however, SSB in this current version expects the port number that MySQL is listening on to be the default port number of 3306. Support for different port number assignments may be made available in future releases.
 
-* When using the load generating tool, keep in mind that if too many users are attempting to write to the same table at the same time, a deadlock will occur.
+* When using the load generating tool, keep in mind that if too many users are attempting to write to the same table at the same time, a [deadlock](https://learn.microsoft.com/en-us/sql/relational-databases/sql-server-deadlocks-guide?view=sql-server-ver16) will occur. 
 
-https://learn.microsoft.com/en-us/sql/relational-databases/sql-server-deadlocks-guide?view=sql-server-ver16
-
-    This issue does not occur when doing 100% reads, but using any percentage of writes can hit this error - especially when specifying a larger number of users (via the -u option). Naturally, the larger % of writes, the greater the chance of hitting this condition. You will be less likely to hit this issue if you also specify -mu (max users) as the same or greater value as users. (ie, if -u is 100, then set -mu as 100 or more).
+This issue does not occur when doing 100% reads, but using any percentage of writes can hit this error - especially when specifying a larger number of users (via the -u option). Naturally, the larger % of writes, the greater the chance of hitting this condition. You will be less likely to hit this issue if you also specify -mu (max users) as the same or greater value as users. (ie, if -u is 100, then set -mu as 100 or more).
 
 * If the number of users specified exceeds the number of tables created in the database, then errors can also occur.
 
@@ -130,13 +128,9 @@ For a synopsis on what the following recommended settings do, please refer to th
 * Database logging mode: Simple
 * Database Target Recovery Interval: 0 seconds
 
-Microsoft also publishes a best practice for SQL performance document, found here:
+Microsoft also publishes a [best practice for SQL performance document](https://learn.microsoft.com/en-us/sql/linux/sql-server-linux-performance-best-practices?view=sql-server-ver16).
 
-https://learn.microsoft.com/en-us/sql/linux/sql-server-linux-performance-best-practices?view=sql-server-ver16
-
-These recommendations include some settings that leverage the use of the tuned utility in Linux.
-
-https://tuned-project.org/
+These recommendations include some settings that leverage the use of the [tuned](https://tuned-project.org/) utility in Linux.
 
 Using the MS SQL profile changes these settings and when tuned is disabled, the changes revert to defaults. Highly recommended.
 
